@@ -25,8 +25,6 @@
 (defun current-mode ()
   (first *mode*))
 
-(defun push-stack)
-
 (defgeneric handle-command (mode cmd))
 
 (defmethod handle-command (mode cmd)
@@ -37,13 +35,6 @@
                 collect (destructuring-bind ((mode cmd) &rest body) item
                           `(defmethod handle-command ((,(gensym) (eql ,mode)) (,(gensym) (eql ,cmd)))
                              ,@body)))))
-#|
-(defhandlers
-    ((nil :key_ok)
-     (vom:info "key-ok in basis"))
-    ((nil :key_tv)
-     (vom:info "key-tv in basis")))
-|#
 
 ;;; thread & locks
 

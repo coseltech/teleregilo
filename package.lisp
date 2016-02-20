@@ -7,6 +7,16 @@
            #:handle-command
            #:defhandlers
            #:start-thread
-           #:stop-thread)
-  
+           #:stop-thread))
+
+(defpackage #:teleregilo-speak
+  (:use #:cl)
+  (:export #:*current-language*
+           #:render-phrase
+           #:say))
+
+(defpackage #:teleregilo-automation
+  (:use #:cl 
+        #:teleregilo
+        #:teleregilo-speak))
 

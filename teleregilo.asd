@@ -9,5 +9,6 @@
                #:vom)
   :serial t
   :components ((:file "package")
-               (:file "teleregilo")))
+               (:file "teleregilo")
+               (:file "automation")))
 
