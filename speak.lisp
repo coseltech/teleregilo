@@ -1,12 +1,8 @@
 (in-package #:teleregilo-speak)
 
-(defconstant +festival-password+ "H70cihxIbpcQzFnRpzeoadAcJDmd6tA7oWCpjSvDY3PVD8PAq66B7QPsK5yN69dALxpvMM6sdfePs5TzLjpsV28cmmmwtmHFitatVmNv8cKntDmxs9DQoWd33RG7ifBP")
-
-(defvar *current-language* :en)
+(defparameter +festival-password+ "H70cihxIbpcQzFnRpzeoadAcJDmd6tA7oWCpjSvDY3PVD8PAq66B7QPsK5yN69dALxpvMM6sdfePs5TzLjpsV28cmmmwtmHFitatVmNv8cKntDmxs9DQoWd33RG7ifBP")
 
 (defvar *festival-socket* nil)
-
-(defgeneric render-phrase (language phrase &rest args))
 
 (defmethod festival-preamble (language)
   (case language
@@ -15,7 +11,7 @@
 
 (defun ensure-festival-connected ()
   (vom:info "Socket ~a" *festival-socket*)
-  (unless *festival-socket*
+  (unless (and *festival-socket* (not (as:socket-closed-p *festival-socket*)))
     (setf *festival-socket*
           (as:tcp-connect "localhost" 1314
                           (lambda (socket data)
@@ -35,8 +31,8 @@
     (ensure-festival-connected)
     (as:write-socket-data *festival-socket* data)))
 
-(defun say (phrase &rest args)
+(defun say (language phrase)
   (vom:info "Saying ~a" phrase)
-  (festival *current-language* (funcall #'render-phrase *current-language* args)))
+  (festival language phrase))
 
 

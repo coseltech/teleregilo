@@ -6,17 +6,16 @@
            #:*stack*
            #:handle-command
            #:defhandlers
-           #:start-thread
-           #:stop-thread))
+           #:start
+           #:stop))
 
 (defpackage #:teleregilo-speak
   (:use #:cl)
-  (:export #:*current-language*
-           #:render-phrase
-           #:say))
+  (:export #:say))
 
 (defpackage #:teleregilo-automation
   (:use #:cl 
         #:teleregilo
-        #:teleregilo-speak))
+        #:blackbird
+        #:carrier))
 

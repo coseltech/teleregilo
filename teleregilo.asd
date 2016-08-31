@@ -6,9 +6,12 @@
   :license "GPL"
   :depends-on (#:cl-async
                #:bordeaux-threads
-               #:vom)
+               #:vom
+               #:carrier
+               #:cl-one-time-passwords)
   :serial t
   :components ((:file "package")
                (:file "teleregilo")
+               (:file "speak")
                (:file "automation")))
 
